@@ -79,28 +79,33 @@ productsRequest.send();
 
 function updatePricesWithDiscount(e) {
 
+  var firstOption = selectElement.firstChild;
+  if (firstOption.hasAttribute("disabled")) {
+    selectElement.removeChild(firstOption);
+  }
+
   var discount;
   var discountCategory;
   var newPrice;
   var amountOffPrice;
   var updatedProducts = document.querySelectorAll("section");
+  var categoryIndex;
+  var categoryInformation;
 
   if (e.target.value === "Winter") {
-    discount = .1;
-    discountCategory = "Apparel"
+    categoryIndex = 0;
   } else if (e.target.value === "Autumn") {
-      discount = .25;
-      discountCategory = "Furniture"
-    } else if (e.target.value === "Spring") {
-      discount = .15;
-      discountCategory = "Household"
-      }
+    categoryIndex = 1;
+    } else {
+      categoryIndex = 2;
+    }
 
   for (var i = 0; i < products.products.length; i++) {
+    categoryInformation = categories.categories[categoryIndex];
     productArray = products.products[i];
     currentProduct = updatedProducts[i];
-    if ( productArray.category_id == discountCategory) {
-      amountOffPrice = productArray.price * discount;
+    if ( productArray.category_id == categoryInformation.name) {
+      amountOffPrice = productArray.price * categoryInformation.discount;
       newPrice = productArray.price - amountOffPrice;
       currentProduct.innerHTML = ` <h1>${productArray.name}</h1>
                                        <p>Department: ${productArray.category_id}</p>
