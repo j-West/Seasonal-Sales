@@ -25,7 +25,7 @@ function getCategoryInfo(e) {
     optionElement.innerHTML = currentCaretogry.season_discount;
     selectElement.appendChild(optionElement);
   }
-wrapperDiv.appendChild(selectElement);
+  wrapperDiv.appendChild(selectElement);
 }
 
 categoriesRequest.addEventListener("load", getCategoryInfo);
@@ -54,7 +54,7 @@ for (var i = 0; i < products.products.length; i++) {
       break;
   }
 
-var productSection = document.createElement("section");
+  var productSection = document.createElement("section");
 
   productSection.innerHTML += ` <h1>${currentProduct.name}</h1>
                             <p>Department: ${currentProduct.category_id}</p>
@@ -64,8 +64,57 @@ var productSection = document.createElement("section");
   wrapperDiv.appendChild(productSection);
 
   }
+
+  // Event Listener on select element
+
+  selectElement.addEventListener("change", updatePricesWithDiscount)
+
 }
 
 productsRequest.addEventListener("load", getProductInfo);
 productsRequest.open("GET", "products.json");
 productsRequest.send();
+
+
+
+
+function updatePricesWithDiscount(e) {
+
+  var discount;
+  var discountCategory;
+  var newPrice;
+  var amountOffPrice;
+  var updatedProducts = document.querySelectorAll("section");
+console.log(e);
+  if (e.target.value === "Winter") {
+    discount = .1;
+    discountCategory = "Apparel"
+  } else if (e.target.value === "Autumn") {
+      discount = .25;
+      discountCategory = "Furniture"
+    } else if (e.target.value === "Spring") {
+      discount = .15;
+      discountCategory = "Household"
+    }
+
+  for (var i = 0; i < products.products.length; i++) {
+    productArray = products.products[i];
+    currentProduct = updatedProducts[i];
+    if ( productArray.category_id == discountCategory) {
+      amountOffPrice = productArray.price * discount;
+      newPrice = productArray.price - amountOffPrice;
+      currentProduct.innerHTML = ` <h1>${productArray.name}</h1>
+                                       <p>Department: ${productArray.category_id}</p>
+                                       <p>Price: ${newPrice.toFixed(2)}</p>
+                                       <hr>
+                                     `
+    } else {
+          currentProduct.innerHTML = ` <h1>${productArray.name}</h1>
+                                       <p>Department: ${productArray.category_id}</p>
+                                       <p>Price: ${productArray.price.toFixed(2)}</p>
+                                       <hr>
+                                     `
+
+          }
+      }
+  }
