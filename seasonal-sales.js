@@ -53,12 +53,15 @@ for (var i = 0; i < products.products.length; i++) {
       currentProduct.category_id = "Household"
       break;
   }
-  productDiv.innerHTML += ` <h1>${currentProduct.name}</h1>
+
+var productSection = document.createElement("section");
+
+  productSection.innerHTML += ` <h1>${currentProduct.name}</h1>
                             <p>Department: ${currentProduct.category_id}</p>
                             <p>Price: ${currentProduct.price}</p>
                             <hr>
                           `
-  wrapperDiv.appendChild(productDiv);
+  wrapperDiv.appendChild(productSection);
 
   }
 }
