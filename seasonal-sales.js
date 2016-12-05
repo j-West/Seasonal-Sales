@@ -1,5 +1,4 @@
 var productsRequest = new XMLHttpRequest();
-// var productSection = document.createElement("section");
 var wrapperDiv = document.querySelector("#wrapper");
 var selectElement;
 var optionElement;
@@ -12,8 +11,8 @@ var categoriesRequest = new XMLHttpRequest();
 
 function getCategoryInfo(e) {
  categories = JSON.parse(e.target.responseText);
-  console.log(categories);
-  console.log();
+  // console.log(categories);
+
 
   selectElement = document.createElement("select");
   selectElement.appendChild(document.createElement("option"));
@@ -37,31 +36,31 @@ categoriesRequest.send();
 
 function getProductInfo(e) {
   products = JSON.parse(e.target.responseText);
-  console.log(products);
-  console.log(categories);
+  // console.log(products);
+  // console.log(categories);
 
-for (var i = 0; i < products.products.length; i++) {
-  currentProduct = products.products[i];
-  switch (currentProduct.category_id) {
-    case 1:
-      currentProduct.category_id = "Apparel"
-      break;
-    case 2:
-      currentProduct.category_id = "Furniture"
-      break;
-    case 3:
-      currentProduct.category_id = "Household"
-      break;
-  }
+  for (var i = 0; i < products.products.length; i++) {
+    currentProduct = products.products[i];
+    switch (currentProduct.category_id) {
+      case 1:
+        currentProduct.category_id = "Apparel"
+        break;
+      case 2:
+        currentProduct.category_id = "Furniture"
+        break;
+      case 3:
+        currentProduct.category_id = "Household"
+        break;
+    }
 
-  var productSection = document.createElement("section");
+    var productSection = document.createElement("section");
 
-  productSection.innerHTML += ` <h1>${currentProduct.name}</h1>
-                            <p>Department: ${currentProduct.category_id}</p>
-                            <p>Price: ${currentProduct.price}</p>
-                            <hr>
-                          `
-  wrapperDiv.appendChild(productSection);
+    productSection.innerHTML += ` <h1>${currentProduct.name}</h1>
+                              <p>Department: ${currentProduct.category_id}</p>
+                              <p>Price: ${currentProduct.price}</p>
+                              <hr>
+                            `
+    wrapperDiv.appendChild(productSection);
 
   }
 
@@ -95,7 +94,7 @@ function updatePricesWithDiscount(e) {
     } else if (e.target.value === "Spring") {
       discount = .15;
       discountCategory = "Household"
-    }
+      }
 
   for (var i = 0; i < products.products.length; i++) {
     productArray = products.products[i];
