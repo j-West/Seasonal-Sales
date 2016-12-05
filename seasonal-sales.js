@@ -3,15 +3,17 @@ var productDiv = document.createElement("div");
 var wrapperDiv = document.querySelector("#wrapper");
 var selectElement;
 var optionElement;
-
+var categories;
+var products;
 
 //Categories JSON file
 
 var categoriesRequest = new XMLHttpRequest();
 
 function getCategoryInfo(e) {
- var categories = JSON.parse(e.target.responseText);
+ categories = JSON.parse(e.target.responseText);
   console.log(categories);
+  console.log();
 
   selectElement = document.createElement("select");
 
@@ -33,8 +35,9 @@ categoriesRequest.send();
 // Products JSON file
 
 function getProductInfo(e) {
-  var products = JSON.parse(e.target.responseText);
+  products = JSON.parse(e.target.responseText);
   console.log(products);
+  console.log(categories);
 
 
 
