@@ -85,7 +85,7 @@ function updatePricesWithDiscount(e) {
   var newPrice;
   var amountOffPrice;
   var updatedProducts = document.querySelectorAll("section");
-console.log(e);
+
   if (e.target.value === "Winter") {
     discount = .1;
     discountCategory = "Apparel"
@@ -114,7 +114,6 @@ console.log(e);
                                        <p>Price: ${productArray.price.toFixed(2)}</p>
                                        <hr>
                                      `
-
-          }
       }
   }
+}
