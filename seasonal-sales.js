@@ -1,5 +1,5 @@
 var productsRequest = new XMLHttpRequest();
-var productDiv = document.createElement("div");
+// var productSection = document.createElement("section");
 var wrapperDiv = document.querySelector("#wrapper");
 var selectElement;
 var optionElement;
@@ -16,6 +16,7 @@ function getCategoryInfo(e) {
   console.log();
 
   selectElement = document.createElement("select");
+  selectElement.appendChild(document.createElement("option"));
 
 
   for (var i = 0; i < categories.categories.length; i++) {
@@ -38,8 +39,6 @@ function getProductInfo(e) {
   products = JSON.parse(e.target.responseText);
   console.log(products);
   console.log(categories);
-
-
 
 for (var i = 0; i < products.products.length; i++) {
   currentProduct = products.products[i];
