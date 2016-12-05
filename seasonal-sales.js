@@ -15,7 +15,7 @@ function getCategoryInfo(e) {
 
 
   selectElement = document.createElement("select");
-  selectElement.appendChild(document.createElement("option"));
+  selectElement.innerHTML = "<option disabled selected></option>"
 
 
   for (var i = 0; i < categories.categories.length; i++) {
@@ -36,8 +36,8 @@ categoriesRequest.send();
 
 function getProductInfo(e) {
   products = JSON.parse(e.target.responseText);
-  // console.log(products);
-  // console.log(categories);
+  console.log(products);
+  console.log(categories);
 
   for (var i = 0; i < products.products.length; i++) {
     currentProduct = products.products[i];
