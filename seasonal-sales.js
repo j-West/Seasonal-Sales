@@ -18,8 +18,8 @@ function getCategoryInfo(e) {
   selectElement.innerHTML = "<option disabled selected></option>"
 
 
-  for (var i = 0; i < categories.categories.length; i++) {
-    currentCaretogry = categories.categories[i];
+  for (var i = 0; i < categories.length; i++) {
+    currentCaretogry = categories[i];
     optionElement = document.createElement("option");
     optionElement.innerHTML = currentCaretogry.season_discount;
     selectElement.appendChild(optionElement);
@@ -28,7 +28,7 @@ function getCategoryInfo(e) {
 }
 
 categoriesRequest.addEventListener("load", getCategoryInfo);
-categoriesRequest.open("GET", "categories.json");
+categoriesRequest.open("GET", "https://seasonal-sales.firebaseio.com/categoryInfo/categories.json");
 categoriesRequest.send();
 
 
@@ -39,8 +39,8 @@ function getProductInfo(e) {
   console.log(products);
   console.log(categories);
 
-  for (var i = 0; i < products.products.length; i++) {
-    currentProduct = products.products[i];
+  for (var i = 0; i < products.length; i++) {
+    currentProduct = products[i];
     switch (currentProduct.category_id) {
       case 1:
         currentProduct.category_id = "Apparel"
@@ -71,7 +71,7 @@ function getProductInfo(e) {
 }
 
 productsRequest.addEventListener("load", getProductInfo);
-productsRequest.open("GET", "products.json");
+productsRequest.open("GET", "https://seasonal-sales.firebaseio.com/productInfo/products.json");
 productsRequest.send();
 
 
@@ -100,9 +100,9 @@ function updatePricesWithDiscount(e) {
       categoryIndex = 2;
     }
 
-  for (var i = 0; i < products.products.length; i++) {
-    categoryInformation = categories.categories[categoryIndex];
-    productArray = products.products[i];
+  for (var i = 0; i < products.length; i++) {
+    categoryInformation = categories[categoryIndex];
+    productArray = products[i];
     currentProduct = updatedProducts[i];
     if ( productArray.category_id == categoryInformation.name) {
       amountOffPrice = productArray.price * categoryInformation.discount;
